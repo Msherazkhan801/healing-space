@@ -119,7 +119,7 @@ export default function TherapistProfile({ onOpenBooking }: TherapistProfileProp
               </div>
               <div className="flex justify-center gap-3 pt-1">
                 <a
-                  href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/healingspace-psychology/therapy-session"}
+                  href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/maheenmanzoor43/30min?back=1&month=2026-09"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2.5 rounded-xl text-xs font-bold bg-[#558d6e] hover:bg-[#427256] text-white flex items-center gap-1.5 shadow-sm transition-all cursor-pointer"
@@ -208,13 +208,15 @@ export default function TherapistProfile({ onOpenBooking }: TherapistProfileProp
 
             {/* CTA row */}
             <div className="pt-2 flex flex-wrap items-center gap-4">
-              <button
-                onClick={onOpenBooking}
+              <a
+                href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/maheenmanzoor43/30min?back=1&month=2026-09"}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-6 py-3 rounded-full text-xs font-bold bg-gradient-to-r from-[#427256] via-[#558d6e] to-[#815b94] text-white shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
               >
                 <Calendar className="w-4 h-4" />
-                <span>Schedule a 1-on-1 Consultation</span>
-              </button>
+                <span>Book 30-Min Session on Calendly</span>
+              </a>
 
               <a
                 href="#screener"

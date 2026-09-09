@@ -210,7 +210,7 @@ export default function HeroSlider({ onOpenBooking }: HeroSliderProps) {
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-4 pt-3">
                 <a
-                  href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/healingspace-psychology/therapy-session"}
+                  href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/maheenmanzoor43/30min?back=1&month=2026-09"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-7 py-3.5 rounded-full text-sm font-bold bg-gradient-to-r from-[#427256] via-[#558d6e] to-[#815b94] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2 group cursor-pointer"

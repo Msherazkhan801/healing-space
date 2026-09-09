@@ -118,7 +118,7 @@ export default function AppointmentsAdminModal({
       setPasswordInput("");
       loadData();
     } else {
-      setAuthError("Incorrect admin password. Please enter the valid security key (default: healing2026).");
+      setAuthError("Incorrect admin password. Please enter the valid security key (default: healing2025).");
     }
   };
 
@@ -317,7 +317,7 @@ export default function AppointmentsAdminModal({
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
-                    placeholder="Enter password (e.g. healing2026)..."
+                    placeholder="Enter password (e.g. healing2056)..."
                     value={passwordInput}
                     onChange={(e) => {
                       setPasswordInput(e.target.value);
@@ -353,7 +353,7 @@ export default function AppointmentsAdminModal({
             </form>
 
             <div className="text-[11px] text-stone-500">
-              Default Master Key: <code className="text-emerald-400">healing2026</code>
+              {/* Default Master Key: <code className="text-emerald-400">healing2026</code> */}
             </div>
           </div>
         ) : (

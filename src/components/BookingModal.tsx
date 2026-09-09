@@ -66,7 +66,7 @@ export default function BookingModal({
   // Calendly URL (customizable via env or defaults to Dr. Maheen's Calendly profile)
   const calendlyUrl =
     process.env.NEXT_PUBLIC_CALENDLY_URL ||
-    "https://calendly.com/healingspace-psychology/therapy-session";
+    "https://calendly.com/maheenmanzoor43/30min?back=1&month=2026-09";
 
   // Update service when preselected changes
   useEffect(() => {

@@ -172,7 +172,7 @@ export default function VideoPlayerModal({
                     </a>
 
                     <a
-                      href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/healingspace-psychology/therapy-session"}
+                      href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/maheenmanzoor43/30min?back=1&month=2026-09"}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-4 py-2 rounded-xl text-xs font-semibold bg-[#558d6e] hover:bg-[#427256] text-white flex items-center gap-1.5 shadow-sm transition-all cursor-pointer"

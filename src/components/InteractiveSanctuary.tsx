@@ -688,7 +688,7 @@ export default function InteractiveSanctuary({
                   </button>
 
                   <a
-                    href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/healingspace-psychology/therapy-session"}
+                    href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/maheenmanzoor43/30min?back=1&month=2026-09"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-6 py-3 rounded-full text-xs font-bold bg-[#815b94] hover:bg-[#6c487f] text-white shadow-sm flex items-center gap-2 transition-all cursor-pointer"

@@ -240,7 +240,7 @@ export default function Navbar({ onOpenBooking, onOpenAdmin }: NavbarProps) {
 
           {/* Main Book Session CTA - Calendly in New Tab */}
           <a
-            href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/healingspace-psychology/therapy-session"}
+            href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/maheenmanzoor43/30min?back=1&month=2026-09"}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-[#427256] via-[#558d6e] to-[#815b94] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
@@ -305,7 +305,7 @@ export default function Navbar({ onOpenBooking, onOpenAdmin }: NavbarProps) {
 
           <div className="pt-3 border-t border-stone-800 flex flex-col gap-2.5">
             <a
-              href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/healingspace-psychology/therapy-session"}
+              href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/maheenmanzoor43/30min?back=1&month=2026-09"}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
