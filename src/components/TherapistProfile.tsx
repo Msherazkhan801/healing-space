@@ -82,7 +82,7 @@ export default function TherapistProfile({ onOpenBooking }: TherapistProfileProp
             <div className="relative mx-auto max-w-[380px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-stone-800 group">
               <div className="relative aspect-[3/4] w-full">
                 <Image
-                  src="/images/therapist.jpg"
+                  src="/images/therapist.png"
                   alt="Dr. Maheen - Clinical Psychologist"
                   fill
                   sizes="(max-width: 768px) 100vw, 380px"
@@ -119,19 +119,28 @@ export default function TherapistProfile({ onOpenBooking }: TherapistProfileProp
               </div>
               <div className="flex justify-center gap-3 pt-1">
                 <a
+                  href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/healingspace-psychology/therapy-session"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2.5 rounded-xl text-xs font-bold bg-[#558d6e] hover:bg-[#427256] text-white flex items-center gap-1.5 shadow-sm transition-all cursor-pointer"
+                >
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>Calendly</span>
+                </a>
+                <a
                   href="https://wa.me/923149341597?text=Hello%20Dr.%20Maheen!%20I%20would%20like%20to%20schedule%20a%20therapy%20session."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-1.5 shadow-sm transition-all"
+                  className="px-4 py-2.5 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-1.5 shadow-sm transition-all"
                 >
                   <MessageCircle className="w-3.5 h-3.5" />
-                  <span>WhatsApp DM</span>
+                  <span>WhatsApp</span>
                 </a>
                 <a
                   href="tel:03149341597"
-                  className="px-4 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-[var(--text-primary)] hover:bg-stone-100 dark:hover:bg-stone-700 flex items-center gap-1.5 shadow-sm transition-all"
+                  className="px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-[var(--text-primary)] hover:bg-stone-100 dark:hover:bg-stone-700 flex items-center gap-1.5 shadow-sm transition-all"
                 >
-                  <span>Direct Call</span>
+                  <span>Call</span>
                 </a>
               </div>
             </div>

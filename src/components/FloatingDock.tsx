@@ -46,6 +46,17 @@ export default function FloatingDock({
           <MessageCircle className="w-4 h-4" />
         </a>
 
+        {/* Calendly Direct */}
+        <a
+          href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/healingspace-psychology/therapy-session"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2.5 rounded-full bg-[#558d6e] hover:bg-[#427256] text-white shadow-md hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer"
+          title="Book Consultation with Calendly"
+        >
+          <Calendar className="w-4 h-4" />
+        </a>
+
         {/* Direct Call */}
         <a
           href="tel:03149341597"

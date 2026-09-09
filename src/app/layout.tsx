@@ -50,17 +50,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`dark ${jakartaSans.variable} ${playfairDisplay.variable} scroll-smooth`}>
-      <head>
-        {/* Calendly Widget Script for seamless in-app booking */}
-        <link
-          href="https://assets.calendly.com/assets/external/widget.css"
-          rel="stylesheet"
-        />
-        <script
-          src="https://assets.calendly.com/assets/external/widget.js"
-          async
-        />
-      </head>
       <body className="min-h-screen bg-[#0e1411] text-[#edf4ef] antialiased selection:bg-[#2c4939] selection:text-[#cbdfd1]">
         {children}
       </body>

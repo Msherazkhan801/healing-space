@@ -106,13 +106,22 @@ export default function FAQSection({ onOpenBooking }: FAQSectionProps) {
               <span>Book Appointment</span>
             </button>
             <a
+              href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/healingspace-psychology/therapy-session"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2.5 rounded-full text-xs font-bold bg-[#815b94] hover:bg-[#6c487f] text-white shadow-md transition-all flex items-center gap-2 cursor-pointer"
+            >
+              <Calendar className="w-3.5 h-3.5" />
+              <span>Schedule with Calendly</span>
+            </a>
+            <a
               href="https://wa.me/923149341597?text=Hello%20Dr.%20Maheen!%20I%20have%20a%20question%20regarding%20The%20Healing%20Space."
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-2.5 rounded-full text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-md transition-all flex items-center gap-2"
             >
               <MessageCircle className="w-3.5 h-3.5" />
-              <span>Ask on WhatsApp: 03149341597</span>
+              <span>Ask on WhatsApp (03149341597)</span>
             </a>
           </div>
         </div>

@@ -67,7 +67,13 @@ export default function Footer({ onOpenBooking, onOpenAdmin }: FooterProps) {
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-emerald-400 transition-colors">
+                <a href="/courses" className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  Video Courses (Google Drive Stream)
+                </a>
+              </li>
+              <li>
+                <a href="/#services" className="hover:text-emerald-400 transition-colors">
                   Therapy Services & Specializations
                 </a>
               </li>
@@ -127,12 +133,20 @@ export default function Footer({ onOpenBooking, onOpenAdmin }: FooterProps) {
               </a>
             </div>
 
-            <div className="pt-2 flex flex-wrap gap-2">
+            <div className="pt-2 flex flex-wrap items-center gap-2">
+              <a
+                href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/healingspace-psychology/therapy-session"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-full text-xs font-bold bg-[#558d6e] hover:bg-[#427256] text-white shadow-sm transition-all cursor-pointer flex items-center gap-1.5"
+              >
+                <span>Book with Calendly</span>
+              </a>
               <button
                 onClick={onOpenBooking}
-                className="px-4 py-2 rounded-full text-xs font-bold bg-[#558d6e] hover:bg-[#427256] text-white shadow-sm transition-all cursor-pointer"
+                className="px-3.5 py-2 rounded-full text-xs font-semibold bg-stone-800 hover:bg-stone-700 text-stone-300 border border-stone-700 transition-all cursor-pointer"
               >
-                Book Consultation (Firestore)
+                Direct Intake Form
               </button>
               <button
                 onClick={onOpenAdmin}

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Volume2,
   VolumeX,
@@ -84,34 +85,41 @@ export default function Navbar({ onOpenBooking, onOpenAdmin }: NavbarProps) {
         </a>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-[#edf4ef]/90">
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-[#edf4ef]/90">
           <a
-            href="#about"
+            href="/#about"
             className="hover:text-[#a5c6af] transition-colors"
           >
             About 
           </a>
           <a
-            href="#services"
+            href="/#services"
             className="hover:text-[#a5c6af] transition-colors"
           >
             Services
           </a>
+          <Link
+            href="/courses"
+            className="flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
+          >
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+            <span>Video Courses</span>
+          </Link>
           <a
-            href="#sanctuary"
+            href="/#sanctuary"
             className="flex items-center gap-1 hover:text-[#b89bc9] transition-colors"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
-            Interactive Sanctuary
+            Sanctuary
           </a>
           <a
-            href="#screener"
+            href="/#screener"
             className="hover:text-[#a5c6af] transition-colors"
           >
             Self-Check
           </a>
           <a
-            href="#faq"
+            href="/#faq"
             className="hover:text-[#a5c6af] transition-colors"
           >
             FAQ
@@ -230,14 +238,16 @@ export default function Navbar({ onOpenBooking, onOpenAdmin }: NavbarProps) {
             <span>03149341597</span>
           </a>
 
-          {/* Main Book Session CTA */}
-          <button
-            onClick={onOpenBooking}
+          {/* Main Book Session CTA - Calendly in New Tab */}
+          <a
+            href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/healingspace-psychology/therapy-session"}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-[#427256] via-[#558d6e] to-[#815b94] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             <Calendar className="w-3.5 h-3.5" />
             <span>Book with Calendly</span>
-          </button>
+          </a>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -262,13 +272,14 @@ export default function Navbar({ onOpenBooking, onOpenAdmin }: NavbarProps) {
             >
               About Dr. Maheen
             </a>
-            <a
-              href="#services"
+            <Link
+              href="/courses"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-1 hover:text-[#a5c6af]"
+              className="py-1 flex items-center gap-2 text-emerald-400 font-semibold"
             >
-              Services & Counselling
-            </a>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              <span>Video Courses & Masterclasses</span>
+            </Link>
             <a
               href="#sanctuary"
               onClick={() => setMobileMenuOpen(false)}
@@ -293,15 +304,16 @@ export default function Navbar({ onOpenBooking, onOpenAdmin }: NavbarProps) {
           </nav>
 
           <div className="pt-3 border-t border-stone-800 flex flex-col gap-2.5">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenBooking();
-              }}
-              className="w-full py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-[#427256] to-[#815b94] text-white shadow-md cursor-pointer"
+            <a
+              href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/healingspace-psychology/therapy-session"}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-[#427256] to-[#815b94] text-white shadow-md cursor-pointer flex items-center justify-center gap-2"
             >
-              Book with Calendly (Dr. Maheen)
-            </button>
+              <Calendar className="w-4 h-4" />
+              <span>Book with Calendly (Dr. Maheen)</span>
+            </a>
             <a
               href="https://wa.me/923149341597?text=Hello%20Dr.%20Maheen!%20I%20would%20like%20to%20book%20a%20therapy%20session."
               target="_blank"

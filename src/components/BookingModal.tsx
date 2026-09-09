@@ -194,59 +194,73 @@ export default function BookingModal({
           </button>
         </div>
 
-        {/* --- TAB 1: CALENDLY EMBED / DIRECT LAUNCH --- */}
+        {/* --- TAB 1: CALENDLY DIRECT LAUNCH (OPENS IN NEW TAB - NO IFRAME) --- */}
         {activeTab === "calendly" && (
-          <div className="space-y-6">
-            <div className="p-5 rounded-2xl bg-stone-900/90 border border-stone-800 space-y-4">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                <div>
-                  <h3 className="font-serif-luxury text-lg font-bold text-white">
-                    Schedule via Calendly
-                  </h3>
-                  <p className="text-xs text-[var(--text-muted)]">
-                    Pick your preferred day and exact time slot directly on Dr. Maheen's official calendar.
-                  </p>
+          <div className="space-y-6 py-2">
+            <div className="p-6 sm:p-8 rounded-3xl bg-stone-900/90 border border-stone-800 space-y-6 text-center">
+              <div className="w-16 h-16 rounded-3xl bg-[#1c2822] border border-[#558d6e]/40 text-[#558d6e] flex items-center justify-center mx-auto shadow-lg">
+                <Calendar className="w-8 h-8 text-[#d4af37]" />
+              </div>
+
+              <div className="space-y-2 max-w-lg mx-auto">
+                <h3 className="font-serif-luxury text-xl sm:text-2xl font-bold text-white">
+                  Schedule Directly with Dr. Maheen
+                </h3>
+                <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+                  Book your confidential psychological consultation slot directly on Dr. Maheen's live Calendly schedule. Select your preferred day, exact time, and consultation format.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left max-w-xl mx-auto pt-2">
+                <div className="p-3.5 rounded-2xl bg-stone-950/80 border border-stone-800/80 space-y-1">
+                  <div className="text-[10px] uppercase font-bold text-[#558d6e] flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3" /> Real-Time Slots
+                  </div>
+                  <div className="text-xs font-semibold text-white">Instant Sync</div>
+                  <div className="text-[10px] text-stone-400">Avoid double-booking</div>
                 </div>
 
+                <div className="p-3.5 rounded-2xl bg-stone-950/80 border border-stone-800/80 space-y-1">
+                  <div className="text-[10px] uppercase font-bold text-[#815b94] flex items-center gap-1">
+                    <Video className="w-3 h-3" /> Flexible Format
+                  </div>
+                  <div className="text-xs font-semibold text-white">Online or Clinic</div>
+                  <div className="text-[10px] text-stone-400">Zoom / In-person</div>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-stone-950/80 border border-stone-800/80 space-y-1">
+                  <div className="text-[10px] uppercase font-bold text-[#d4af37] flex items-center gap-1">
+                    <Lock className="w-3 h-3" /> Confidential
+                  </div>
+                  <div className="text-xs font-semibold text-white">Ethical Privacy</div>
+                  <div className="text-[10px] text-stone-400">Encrypted intake</div>
+                </div>
+              </div>
+
+              {/* ONLY EXTERNAL LINK: CALENDLY IN NEW TAB */}
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a
                   href={calendlyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-full text-xs font-bold bg-[#558d6e] hover:bg-[#427256] text-white shadow-md flex items-center gap-2 transition-all shrink-0 cursor-pointer"
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-full text-xs sm:text-sm font-bold bg-gradient-to-r from-[#427256] via-[#558d6e] to-[#815b94] hover:scale-105 active:scale-95 text-white shadow-xl flex items-center justify-center gap-2.5 transition-all cursor-pointer"
                 >
+                  <Calendar className="w-4 h-4" />
                   <span>Open Calendly in New Tab</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
+                  <ExternalLink className="w-4 h-4" />
                 </a>
-              </div>
 
-              {/* Calendly Inline Frame Simulation / Embed */}
-              <div className="relative w-full h-[380px] rounded-2xl overflow-hidden border border-stone-800 bg-[#0e1411]">
-                <iframe
-                  src={`${calendlyUrl}?embed_domain=${encodeURIComponent(
-                    typeof window !== "undefined" ? window.location.hostname : "localhost"
-                  )}&embed_type=Inline&background_color=131b17&text_color=edf4ef&primary_color=558d6e`}
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  title="Select a Date & Time - Calendly"
-                  className="w-full h-full"
-                />
-              </div>
-
-              {/* Instant WhatsApp Alternative */}
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs border-t border-stone-800">
-                <span className="text-[var(--text-muted)]">
-                  Prefer direct assistance? Message Dr. Maheen directly:
-                </span>
-                <a
-                  href="https://wa.me/923149341597?text=Hello%20Dr.%20Maheen!%20I%20would%20like%20to%20schedule%20a%20therapy%20session%20at%20The%20Healing%20Space."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-1.5 transition-all"
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("custom")}
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-full text-xs font-semibold bg-stone-800 hover:bg-stone-700 text-stone-300 transition-all cursor-pointer"
                 >
-                  <MessageCircle className="w-3.5 h-3.5" />
-                  <span>WhatsApp: 03149341597</span>
-                </a>
+                  Use Direct Intake Form
+                </button>
+              </div>
+
+              <div className="text-[11px] text-stone-500 pt-1">
+                Direct Practice Helpline: <span className="text-stone-300 font-semibold">03149341597</span>
               </div>
             </div>
           </div>
@@ -551,16 +565,17 @@ export default function BookingModal({
                   </div>
                 </div>
 
-                {/* Direct WhatsApp Call to Action */}
+                {/* Confirmation Actions */}
                 <div className="space-y-3 pt-2">
                   <a
-                    href={whatsappLink}
+                    href={calendlyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full max-w-md mx-auto py-3.5 rounded-full text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    className="w-full max-w-md mx-auto py-3.5 rounded-full text-xs font-bold bg-gradient-to-r from-[#427256] via-[#558d6e] to-[#815b94] hover:scale-105 active:scale-95 text-white shadow-lg flex items-center justify-center gap-2 transition-all cursor-pointer"
                   >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>Send 1-Click Confirmation to WhatsApp (03149341597)</span>
+                    <Calendar className="w-4 h-4" />
+                    <span>Open Dr. Maheen's Calendly Schedule in New Tab</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
                   </a>
 
                   <div>

@@ -15,6 +15,7 @@ import {
   MessageCircle,
   Clock,
   Lock,
+  Calendar,
 } from "lucide-react";
 
 interface HeroSliderProps {
@@ -208,51 +209,54 @@ export default function HeroSlider({ onOpenBooking }: HeroSliderProps) {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-4 pt-3">
-                <button
-                  onClick={onOpenBooking}
+                <a
+                  href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/healingspace-psychology/therapy-session"}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="px-7 py-3.5 rounded-full text-sm font-bold bg-gradient-to-r from-[#427256] via-[#558d6e] to-[#815b94] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2 group cursor-pointer"
                 >
-                  <span>{current.primaryBtnText}</span>
+                  <Calendar className="w-4 h-4" />
+                  <span>Book with Calendly</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
+                </a>
 
                 <a
                   href="https://wa.me/923149341597?text=Hello%20Dr.%20Maheen!%20I%20would%20like%20to%20book%20a%20therapy%20session%20at%20The%20Healing%20Space."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3.5 rounded-full text-sm font-bold bg-white/90 dark:bg-stone-800/90 text-emerald-800 dark:text-emerald-300 border border-emerald-600/30 hover:bg-emerald-50 dark:hover:bg-stone-700 shadow-sm flex items-center gap-2 transition-all cursor-pointer"
+                  className="px-6 py-3.5 rounded-full text-sm font-bold bg-stone-800/90 hover:bg-stone-700 text-emerald-400 border border-emerald-600/30 shadow-sm flex items-center gap-2 transition-all cursor-pointer"
                 >
-                  <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  <span>{current.secondaryBtnText}</span>
+                  <MessageCircle className="w-4 h-4 text-emerald-400" />
+                  <span>WhatsApp: 03149341597</span>
                 </a>
               </div>
             </div>
 
-            {/* Right Visual Column (Logo & Doctor Badge Spotlight) */}
+            {/* Right Visual Column (Dr. Maheen Badge Spotlight) */}
             <div className="lg:col-span-5 flex flex-col items-center justify-center">
-              <div className="relative w-full max-w-[340px] sm:max-w-[380px] aspect-square rounded-3xl p-4 bg-gradient-to-tr from-white/90 via-white/50 to-white/90 dark:from-stone-900/90 dark:via-stone-900/50 dark:to-stone-900/90 border border-white dark:border-stone-800 shadow-2xl flex flex-col items-center justify-center text-center group">
+              <div className="relative w-full max-w-[320px] sm:max-w-[360px] rounded-3xl p-4 bg-gradient-to-tr from-stone-900/95 via-stone-900/70 to-stone-900/95 border border-stone-800 shadow-2xl flex flex-col items-center justify-center text-center group">
                 {/* Floating Ring Aura */}
-                <div className="absolute inset-0 rounded-3xl border-2 border-dashed border-[#558d6e]/30 dark:border-[#558d6e]/20 animate-pulse pointer-events-none" />
+                <div className="absolute inset-0 rounded-3xl border-2 border-dashed border-[#558d6e]/30 animate-pulse pointer-events-none" />
 
-                {/* Central Emblem Image */}
-                <div className="relative w-34 h-64 sm:w-52 sm:h-52 rounded-2xl overflow-hidden shadow-md mb-4 border border-[#558d6e]/30 group-hover:scale-105 transition-transform duration-500">
+                {/* Central Doctor Portrait */}
+                <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-lg mb-4 border border-[#558d6e]/40 group-hover:scale-[1.02] transition-transform duration-500 bg-stone-950">
                   <Image
                     src="/images/therapist.png"
-                    alt="The Healing Space Emblem"
+                    alt="Dr. Maheen - Clinical Psychologist"
                     fill
-                    sizes="200px"
-                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, 360px"
+                    className="object-cover object-top"
                     priority
                   />
                 </div>
 
                 {/* Psychologist Identity Plate */}
-                <div className="space-y-1">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-[#e5efe8] dark:bg-[#2c4939] text-[#2c4939] dark:text-[#e5efe8]">
+                <div className="space-y-1.5 w-full">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-[#2c4939] text-[#a5c6af] border border-[#558d6e]/30">
                     <Sparkles className="w-3 h-3 text-[#d4af37]" />
                     <span>Dr. Maheen • Clinical Psychologist</span>
                   </div>
-                  <div className="font-serif-luxury font-bold text-lg text-[#222c26] dark:text-[#edf4ef]">
+                  <div className="font-serif-luxury font-bold text-lg text-[#edf4ef]">
                     The Healing Space
                   </div>
                   <div className="text-xs text-[var(--text-muted)] flex items-center justify-center gap-2">
