@@ -33,11 +33,27 @@ export const metadata: Metadata = {
     "healingspace.psychology",
   ],
   authors: [{ name: " Maheen - Clinical Psychologist" }],
+  icons: {
+    icon: [
+      { url: "/images/logo.png", href: "/images/logo.png" },
+      { url: "/favicon.ico", href: "/favicon.ico" },
+    ],
+    apple: [{ url: "/images/logo.png", href: "/images/logo.png" }],
+    shortcut: ["/images/logo.png"],
+  },
   openGraph: {
     title: "The Healing Space |  Maheen - Clinical Psychologist",
     description: "Support • Understand • Heal. Compassionate evidence-based counselling & psychotherapy.",
     url: "https://healingspace.psychology",
     siteName: "The Healing Space",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 800,
+        height: 800,
+        alt: "The Healing Space Logo",
+      },
+    ],
     locale: "en_US",
     type: "website",
   },
