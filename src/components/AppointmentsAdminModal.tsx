@@ -34,6 +34,8 @@ import {
   Course,
   Lesson,
   getCourses,
+  fetchCoursesFromFirestore,
+  clearAllCourses,
   addGoogleDriveLessonToCourse,
   deleteLessonFromCourse,
   deleteCourse,
@@ -63,12 +65,12 @@ export default function AppointmentsAdminModal({
   // Tabs
   const [activeTab, setActiveTab] = useState<"appointments" | "videos" | "new_course" | "guide">(initialTab);
 
-  // Appointments state
+  // Appointments Data
   const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [loadingApts, setLoadingApts] = useState<boolean>(true);
+  const [loadingApts, setLoadingApts] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // Video management state
+  // Video Courses State
   const [courses, setCourses] = useState<Course[]>([]);
   const [selectedCourseId, setSelectedCourseId] = useState<string>("");
   const [newLessonTitle, setNewLessonTitle] = useState<string>("");
@@ -137,10 +139,12 @@ export default function AppointmentsAdminModal({
     try {
       const data = await fetchAppointments();
       setAppointments(data);
-      const courseList = getCourses();
+      const courseList = await fetchCoursesFromFirestore();
       setCourses(courseList);
-      if (courseList.length > 0 && !selectedCourseId) {
+      if (courseList.length > 0 && (!selectedCourseId || !courseList.some((c) => c.id === selectedCourseId))) {
         setSelectedCourseId(courseList[0].id);
+      } else if (courseList.length === 0) {
+        setSelectedCourseId("");
       }
     } catch (err) {
       console.error("Failed fetching records:", err);
@@ -213,9 +217,25 @@ export default function AppointmentsAdminModal({
       setCourses([...updated]);
       if (updated.length > 0) {
         setSelectedCourseId(updated[0].id);
+      } else {
+        setSelectedCourseId("");
       }
       if (onCoursesUpdated) onCoursesUpdated();
       alert(`Course "${courseTitle}" has been deleted successfully.`);
+    }
+  };
+
+  const handleClearAllCourses = async () => {
+    if (
+      confirm(
+        "Are you sure you want to completely CLEAR ALL courses and videos from Firestore database and local storage? This will remove all dummy and existing courses."
+      )
+    ) {
+      await clearAllCourses();
+      setCourses([]);
+      setSelectedCourseId("");
+      if (onCoursesUpdated) onCoursesUpdated();
+      alert("All courses and videos have been completely cleared!");
     }
   };
 
@@ -530,206 +550,240 @@ export default function AppointmentsAdminModal({
             {/* TAB: GOOGLE DRIVE VIDEO STUDIO */}
             {activeTab === "videos" && (
               <div className="flex-1 overflow-y-auto py-3 space-y-6 pr-1">
-                {/* Upload Form */}
-                <div className="p-5 rounded-2xl bg-stone-900/90 border border-stone-800 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Film className="w-4 h-4 text-[#d4af37]" />
-                      <h3 className="font-bold text-sm text-white">
-                        Upload & Embed Google Drive Video
-                      </h3>
+                {/* If No Courses Exist */}
+                {courses.length === 0 ? (
+                  <div className="p-8 rounded-3xl bg-stone-900/90 border border-stone-800 text-center space-y-4">
+                    <Film className="w-10 h-10 text-stone-600 mx-auto" />
+                    <div className="space-y-1">
+                      <h3 className="text-base font-bold text-white">No Courses Available</h3>
+                      <p className="text-xs text-stone-400 max-w-md mx-auto">
+                        All dummy courses have been cleared. You can now create your genuine course categories and upload your Google Drive videos!
+                      </p>
                     </div>
-                    <span className="text-[11px] text-emerald-400 font-medium">
-                      Admin Authorized
-                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab("new_course")}
+                      className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#558d6e] hover:bg-[#427256] text-white shadow-md inline-flex items-center gap-2 cursor-pointer transition-all"
+                    >
+                      <Plus className="w-4 h-4" />
+                      <span>Create Your First Course</span>
+                    </button>
                   </div>
+                ) : (
+                  <>
+                    {/* Upload Form */}
+                    <div className="p-5 rounded-2xl bg-stone-900/90 border border-stone-800 space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Film className="w-4 h-4 text-[#d4af37]" />
+                          <h3 className="font-bold text-sm text-white">
+                            Upload & Embed Google Drive Video
+                          </h3>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={handleClearAllCourses}
+                            className="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-rose-950/60 hover:bg-rose-900 border border-rose-800/80 text-rose-300 transition-all cursor-pointer flex items-center gap-1"
+                            title="Clear all courses and videos from storage and database"
+                          >
+                            <Trash2 className="w-3 h-3" />
+                            <span>Clear All Courses</span>
+                          </button>
+                          <span className="text-[11px] text-emerald-400 font-medium">
+                            Admin Authorized
+                          </span>
+                        </div>
+                      </div>
 
-                  <form onSubmit={handleAddVideoLesson} className="space-y-3">
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <div className="space-y-1">
-                        <div className="flex items-center justify-between">
+                      <form onSubmit={handleAddVideoLesson} className="space-y-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                          <div className="space-y-1">
+                            <div className="flex items-center justify-between">
+                              <label className="text-[11px] font-bold uppercase text-stone-400">
+                                Select Course / Category
+                              </label>
+                              {selectedCourse && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleDeleteCourse(selectedCourse.id, selectedCourse.title)}
+                                  className="text-[10px] text-rose-400 hover:text-rose-300 hover:underline flex items-center gap-0.5"
+                                  title="Delete this entire course category"
+                                >
+                                  <Trash2 className="w-2.5 h-2.5" /> Delete Course
+                                </button>
+                              )}
+                            </div>
+                            <select
+                              value={selectedCourseId}
+                              onChange={(e) => setSelectedCourseId(e.target.value)}
+                              className="w-full p-2.5 rounded-xl border border-stone-800 bg-stone-950 text-xs text-white"
+                            >
+                              {courses.map((c) => (
+                                <option key={c.id} value={c.id}>
+                                  {c.title} ({c.lessons.length} videos)
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          <div className="space-y-1 sm:col-span-2">
+                            <label className="text-[11px] font-bold uppercase text-stone-400">
+                              Video Lesson Title *
+                            </label>
+                            <input
+                              type="text"
+                              placeholder="e.g. Diaphragmatic Breathing & Vagus Nerve Protocol"
+                              value={newLessonTitle}
+                              onChange={(e) => setNewLessonTitle(e.target.value)}
+                              className="w-full p-2.5 rounded-xl border border-stone-800 bg-stone-950 text-xs text-white"
+                              required
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                          <div className="sm:col-span-2 space-y-1">
+                            <label className="text-[11px] font-bold uppercase text-stone-400 flex items-center gap-1">
+                              <Film className="w-3.5 h-3.5 text-emerald-400" /> Google Drive Share URL or File ID *
+                            </label>
+                            <input
+                              type="text"
+                              placeholder="https://drive.google.com/file/d/1BxiMVs0XRA5nFMd.../view?usp=sharing"
+                              value={newDriveUrl}
+                              onChange={(e) => setNewDriveUrl(e.target.value)}
+                              className="w-full p-2.5 rounded-xl border border-stone-800 bg-stone-950 text-xs text-white font-mono"
+                              required
+                            />
+                          </div>
+
+                          <div className="space-y-1">
+                            <label className="text-[11px] font-bold uppercase text-stone-400">
+                              Duration
+                            </label>
+                            <input
+                              type="text"
+                              placeholder="e.g. 18 mins"
+                              value={newLessonDuration}
+                              onChange={(e) => setNewLessonDuration(e.target.value)}
+                              className="w-full p-2.5 rounded-xl border border-stone-800 bg-stone-950 text-xs text-white"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="space-y-1">
                           <label className="text-[11px] font-bold uppercase text-stone-400">
-                            Select Course / Category
+                            Lesson Summary / Clinical Notes
                           </label>
-                          {selectedCourse && (
+                          <input
+                            type="text"
+                            placeholder="Brief summary of psychological tools and exercises taught in this video..."
+                            value={newLessonDesc}
+                            onChange={(e) => setNewLessonDesc(e.target.value)}
+                            className="w-full p-2.5 rounded-xl border border-stone-800 bg-stone-950 text-xs text-white"
+                          />
+                        </div>
+
+                        <div className="flex justify-end pt-1">
+                          <button
+                            type="submit"
+                            disabled={isUploading}
+                            className="px-6 py-2.5 rounded-xl text-xs font-bold bg-[#558d6e] hover:bg-[#427256] text-white flex items-center gap-2 shadow-md cursor-pointer transition-all disabled:opacity-50"
+                          >
+                            <Upload className="w-4 h-4" />
+                            <span>{isUploading ? "Saving to Cloud..." : "Publish Google Drive Video"}</span>
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+
+                    {/* Existing Video List with Delete */}
+                    {selectedCourse && (
+                      <div className="space-y-3">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <h4 className="font-bold text-xs uppercase tracking-wider text-stone-300">
+                            Uploaded Videos in "{selectedCourse.title}" ({selectedCourse.lessons.length}):
+                          </h4>
+                          <div className="flex items-center gap-3">
                             <button
                               type="button"
                               onClick={() => handleDeleteCourse(selectedCourse.id, selectedCourse.title)}
-                              className="text-[10px] text-rose-400 hover:text-rose-300 hover:underline flex items-center gap-0.5"
-                              title="Delete this entire course category"
+                              className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-rose-950/80 border border-rose-800 text-rose-300 hover:bg-rose-900 hover:text-white transition-all cursor-pointer flex items-center gap-1"
+                              title="Delete this entire course"
                             >
-                              <Trash2 className="w-2.5 h-2.5" /> Delete Course
+                              <Trash2 className="w-3 h-3" />
+                              <span>Delete Course</span>
                             </button>
-                          )}
-                        </div>
-                        <select
-                          value={selectedCourseId}
-                          onChange={(e) => setSelectedCourseId(e.target.value)}
-                          className="w-full p-2.5 rounded-xl border border-stone-800 bg-stone-950 text-xs text-white"
-                        >
-                          {courses.map((c) => (
-                            <option key={c.id} value={c.id}>
-                              {c.title} ({c.lessons.length} videos)
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-
-                      <div className="space-y-1 sm:col-span-2">
-                        <label className="text-[11px] font-bold uppercase text-stone-400">
-                          Video Lesson Title *
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="e.g. Diaphragmatic Breathing & Vagus Nerve Protocol"
-                          value={newLessonTitle}
-                          onChange={(e) => setNewLessonTitle(e.target.value)}
-                          className="w-full p-2.5 rounded-xl border border-stone-800 bg-stone-950 text-xs text-white"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <div className="sm:col-span-2 space-y-1">
-                        <label className="text-[11px] font-bold uppercase text-stone-400 flex items-center gap-1">
-                          <Film className="w-3.5 h-3.5 text-emerald-400" /> Google Drive Share URL or File ID *
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="https://drive.google.com/file/d/1BxiMVs0XRA5nFMd.../view?usp=sharing"
-                          value={newDriveUrl}
-                          onChange={(e) => setNewDriveUrl(e.target.value)}
-                          className="w-full p-2.5 rounded-xl border border-stone-800 bg-stone-950 text-xs text-white font-mono"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-1">
-                        <label className="text-[11px] font-bold uppercase text-stone-400">
-                          Duration
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="e.g. 18 mins"
-                          value={newLessonDuration}
-                          onChange={(e) => setNewLessonDuration(e.target.value)}
-                          className="w-full p-2.5 rounded-xl border border-stone-800 bg-stone-950 text-xs text-white"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-1">
-                      <label className="text-[11px] font-bold uppercase text-stone-400">
-                        Lesson Summary / Clinical Notes
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Brief summary of psychological tools and exercises taught in this video..."
-                        value={newLessonDesc}
-                        onChange={(e) => setNewLessonDesc(e.target.value)}
-                        className="w-full p-2.5 rounded-xl border border-stone-800 bg-stone-950 text-xs text-white"
-                      />
-                    </div>
-
-                    <div className="flex justify-end pt-1">
-                      <button
-                        type="submit"
-                        disabled={isUploading}
-                        className="px-6 py-2.5 rounded-xl text-xs font-bold bg-[#558d6e] hover:bg-[#427256] text-white flex items-center gap-2 shadow-md cursor-pointer transition-all disabled:opacity-50"
-                      >
-                        <Upload className="w-4 h-4" />
-                        <span>{isUploading ? "Saving to Cloud..." : "Publish Google Drive Video"}</span>
-                      </button>
-                    </div>
-                  </form>
-                </div>
-
-                {/* Existing Video List with Delete */}
-                {selectedCourse && (
-                  <div className="space-y-3">
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <h4 className="font-bold text-xs uppercase tracking-wider text-stone-300">
-                        Uploaded Videos in "{selectedCourse.title}" ({selectedCourse.lessons.length}):
-                      </h4>
-                      <div className="flex items-center gap-3">
-                        <button
-                          type="button"
-                          onClick={() => handleDeleteCourse(selectedCourse.id, selectedCourse.title)}
-                          className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-rose-950/80 border border-rose-800 text-rose-300 hover:bg-rose-900 hover:text-white transition-all cursor-pointer flex items-center gap-1"
-                          title="Delete this entire course"
-                        >
-                          <Trash2 className="w-3 h-3" />
-                          <span>Delete Course</span>
-                        </button>
-                        <a
-                          href="/courses"
-                          target="_blank"
-                          className="text-xs text-emerald-400 hover:underline flex items-center gap-1"
-                        >
-                          <span>Preview Courses</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </a>
-                      </div>
-                    </div>
-
-                    {selectedCourse.lessons.length === 0 ? (
-                      <div className="p-8 rounded-2xl bg-stone-950 border border-stone-800 text-center space-y-3">
-                        <Film className="w-8 h-8 text-stone-600 mx-auto" />
-                        <p className="text-xs text-stone-400">
-                          No videos in "{selectedCourse.title}" yet. Paste your first Google Drive share link above!
-                        </p>
-                        <button
-                          type="button"
-                          onClick={() => handleDeleteCourse(selectedCourse.id, selectedCourse.title)}
-                          className="px-4 py-2 rounded-xl text-xs font-semibold bg-rose-950/80 border border-rose-800 text-rose-300 hover:bg-rose-900 hover:text-white transition-all cursor-pointer inline-flex items-center gap-1.5 shadow-sm"
-                        >
-                          <Trash2 className="w-3.5 h-3.5" />
-                          <span>Delete This Empty Course ("{selectedCourse.title}")</span>
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="space-y-2">
-                        {selectedCourse.lessons.map((lesson) => (
-                          <div
-                            key={lesson.id}
-                            className="p-3.5 rounded-xl bg-stone-900/60 border border-stone-800 flex items-center justify-between gap-3"
-                          >
-                            <div className="space-y-0.5 min-w-0">
-                              <div className="text-xs font-bold text-white truncate">
-                                {lesson.title}
-                              </div>
-                              <div className="text-[11px] text-stone-400 flex items-center gap-2 font-mono truncate">
-                                <span>{lesson.duration}</span>
-                                <span>•</span>
-                                <span className="text-emerald-400 truncate max-w-xs">{lesson.googleDriveUrl}</span>
-                              </div>
-                            </div>
-
-                            <div className="flex items-center gap-2 shrink-0">
-                              <a
-                                href={lesson.googleDriveUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-stone-800 hover:bg-stone-700 text-stone-300 flex items-center gap-1"
-                              >
-                                <ExternalLink className="w-3 h-3" />
-                                <span>View</span>
-                              </a>
-                              <button
-                                onClick={() => handleDeleteLesson(selectedCourse.id, lesson.id)}
-                                className="px-3 py-1.5 rounded-lg bg-rose-950/80 border border-rose-800 text-rose-300 hover:bg-rose-900 hover:text-white transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
-                                title="Delete video lesson"
-                              >
-                                <Trash2 className="w-3.5 h-3.5" />
-                                <span className="text-xs font-semibold">Delete Video</span>
-                              </button>
-                            </div>
+                            <a
+                              href="/courses"
+                              target="_blank"
+                              className="text-xs text-emerald-400 hover:underline flex items-center gap-1"
+                            >
+                              <span>Preview Courses</span>
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
                           </div>
-                        ))}
+                        </div>
+
+                        {selectedCourse.lessons.length === 0 ? (
+                          <div className="p-8 rounded-2xl bg-stone-950 border border-stone-800 text-center space-y-3">
+                            <Film className="w-8 h-8 text-stone-600 mx-auto" />
+                            <p className="text-xs text-stone-400">
+                              No videos in "{selectedCourse.title}" yet. Paste your first Google Drive share link above!
+                            </p>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteCourse(selectedCourse.id, selectedCourse.title)}
+                              className="px-4 py-2 rounded-xl text-xs font-semibold bg-rose-950/80 border border-rose-800 text-rose-300 hover:bg-rose-900 hover:text-white transition-all cursor-pointer inline-flex items-center gap-1.5 shadow-sm"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                              <span>Delete This Empty Course ("{selectedCourse.title}")</span>
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="space-y-2">
+                            {selectedCourse.lessons.map((lesson) => (
+                              <div
+                                key={lesson.id}
+                                className="p-3.5 rounded-xl bg-stone-900/60 border border-stone-800 flex items-center justify-between gap-3"
+                              >
+                                <div className="space-y-0.5 min-w-0">
+                                  <div className="text-xs font-bold text-white truncate">
+                                    {lesson.title}
+                                  </div>
+                                  <div className="text-[11px] text-stone-400 flex items-center gap-2 font-mono truncate">
+                                    <span>{lesson.duration}</span>
+                                    <span>•</span>
+                                    <span className="text-emerald-400 truncate max-w-xs">{lesson.googleDriveUrl}</span>
+                                  </div>
+                                </div>
+
+                                <div className="flex items-center gap-2 shrink-0">
+                                  <a
+                                    href={lesson.googleDriveUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-stone-800 hover:bg-stone-700 text-stone-300 flex items-center gap-1"
+                                  >
+                                    <ExternalLink className="w-3 h-3" />
+                                    <span>View</span>
+                                  </a>
+                                  <button
+                                    onClick={() => handleDeleteLesson(selectedCourse.id, lesson.id)}
+                                    className="px-3 py-1.5 rounded-lg bg-rose-950/80 border border-rose-800 text-rose-300 hover:bg-rose-900 hover:text-white transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                                    title="Delete video lesson"
+                                  >
+                                    <Trash2 className="w-3.5 h-3.5" />
+                                    <span className="text-xs font-semibold">Delete Video</span>
+                                  </button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     )}
-                  </div>
+                  </>
                 )}
               </div>
             )}
