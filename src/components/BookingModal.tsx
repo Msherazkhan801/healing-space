@@ -63,7 +63,7 @@ export default function BookingModal({
     message: string;
   } | null>(null);
 
-  // Calendly URL (customizable via env or defaults to Dr. Maheen's Calendly profile)
+  // Calendly URL (customizable via env or defaults to  Maheen's Calendly profile)
   const calendlyUrl =
     process.env.NEXT_PUBLIC_CALENDLY_URL ||
     "https://calendly.com/maheenmanzoor43/30min?back=1&month=2026-09";
@@ -124,7 +124,7 @@ export default function BookingModal({
     } catch (err) {
       console.error("Booking submission error:", err);
       alert(
-        "An error occurred. Please message Dr. Maheen directly on WhatsApp at 03149341597."
+        "An error occurred. Please message  Maheen directly on WhatsApp at 03149341597."
       );
     } finally {
       setIsSubmitting(false);
@@ -157,10 +157,10 @@ export default function BookingModal({
         <div className="mb-6 space-y-1">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-[#2c4939] text-[#a5c6af] border border-[#558d6e]/30">
             <Sparkles className="w-3 h-3 text-[#d4af37]" />
-            <span>Dr. Maheen • The Healing Space</span>
+            <span> Maheen • The Healing Space</span>
           </div>
           <h2 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-white">
-            Book Your Session with Dr. Maheen
+            Book Your Session with  Maheen
           </h2>
           <p className="text-xs text-[var(--text-muted)] flex items-center gap-1.5">
             <Lock className="w-3.5 h-3.5 text-[#558d6e]" /> 100% Confidential • Calendly & WhatsApp Integration
@@ -204,10 +204,10 @@ export default function BookingModal({
 
               <div className="space-y-2 max-w-lg mx-auto">
                 <h3 className="font-serif-luxury text-xl sm:text-2xl font-bold text-white">
-                  Schedule Directly with Dr. Maheen
+                  Schedule Directly with  Maheen
                 </h3>
                 <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
-                  Book your confidential psychological consultation slot directly on Dr. Maheen's live Calendly schedule. Select your preferred day, exact time, and consultation format.
+                  Book your confidential psychological consultation slot directly on  Maheen's live Calendly schedule. Select your preferred day, exact time, and consultation format.
                 </p>
               </div>
 
@@ -335,7 +335,7 @@ export default function BookingModal({
                       <div>
                         <div className="text-xs font-bold">In-Clinic Sanctuary</div>
                         <div className="text-[11px] text-[var(--text-muted)] mt-0.5">
-                          Private clinic room with Dr. Maheen
+                          Private clinic room with  Maheen
                         </div>
                       </div>
                     </button>
@@ -574,7 +574,7 @@ export default function BookingModal({
                     className="w-full max-w-md mx-auto py-3.5 rounded-full text-xs font-bold bg-gradient-to-r from-[#427256] via-[#558d6e] to-[#815b94] hover:scale-105 active:scale-95 text-white shadow-lg flex items-center justify-center gap-2 transition-all cursor-pointer"
                   >
                     <Calendar className="w-4 h-4" />
-                    <span>Open Dr. Maheen's Calendly Schedule in New Tab</span>
+                    <span>Open  Maheen's Calendly Schedule in New Tab</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
 

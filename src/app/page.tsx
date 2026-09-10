@@ -54,7 +54,7 @@ export default function HomePage() {
       {/* Hero Animated Pillar Showcase */}
       <HeroSlider onOpenBooking={() => handleOpenBooking()} />
 
-      {/* About Dr. Maheen & Therapeutic Philosophy */}
+      {/* About  Maheen & Therapeutic Philosophy */}
       <TherapistProfile onOpenBooking={() => handleOpenBooking()} />
 
       {/* Psychological Services & Modalities Grid */}

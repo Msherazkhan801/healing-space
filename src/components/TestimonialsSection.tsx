@@ -20,7 +20,7 @@ export default function TestimonialsSection() {
       concern: "Severe Generalized Anxiety & Panic",
       sessions: "12 Sessions",
       quote:
-        "When I first walked into Dr. Maheen's care, I couldn't leave my room without heart palpitations and spiraling thoughts. Through CBT and grounding exercises, she helped me understand that I was safe. Today, I am back at work with genuine confidence.",
+        "When I first walked into  Maheen's care, I couldn't leave my room without heart palpitations and spiraling thoughts. Through CBT and grounding exercises, she helped me understand that I was safe. Today, I am back at work with genuine confidence.",
       rating: 5,
     },
     {
@@ -28,7 +28,7 @@ export default function TestimonialsSection() {
       concern: "Depression & Severe Burnout",
       sessions: "8 Sessions",
       quote:
-        "The Healing Space lives up to its name in every sense. Dr. Maheen's empathy is so authentic and non-judgmental. She never treated me like a disorder to be fixed; she gave me my voice and energy back.",
+        "The Healing Space lives up to its name in every sense.  Maheen's empathy is so authentic and non-judgmental. She never treated me like a disorder to be fixed; she gave me my voice and energy back.",
       rating: 5,
     },
     {
@@ -36,7 +36,7 @@ export default function TestimonialsSection() {
       concern: "Marital & Communication Difficulties",
       sessions: "10 Sessions",
       quote:
-        "Couples therapy with Dr. Maheen saved our marriage from constant resentment. She taught us how to listen without defensiveness and express our emotional needs safely. We are endlessly grateful.",
+        "Couples therapy with  Maheen saved our marriage from constant resentment. She taught us how to listen without defensiveness and express our emotional needs safely. We are endlessly grateful.",
       rating: 5,
     },
     {
@@ -44,7 +44,7 @@ export default function TestimonialsSection() {
       concern: "Trauma & Low Self-Esteem",
       sessions: "15 Sessions",
       quote:
-        "I had carried childhood guilt for almost twenty years. Dr. Maheen's inner child work was transformative. For the first time in my life, I feel at peace in my own skin.",
+        "I had carried childhood guilt for almost twenty years.  Maheen's inner child work was transformative. For the first time in my life, I feel at peace in my own skin.",
       rating: 5,
     },
   ];
@@ -70,7 +70,7 @@ export default function TestimonialsSection() {
             Voices from The Healing Space
           </h2>
           <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
-            Real experiences from clients who found clarity, self-compassion, and emotional freedom with Dr. Maheen.
+            Real experiences from clients who found clarity, self-compassion, and emotional freedom with  Maheen.
           </p>
           <div className="text-[11px] text-[var(--text-muted)] flex items-center justify-center gap-1.5 pt-1">
             <ShieldCheck className="w-3.5 h-3.5 text-[#558d6e]" />

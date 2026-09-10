@@ -17,12 +17,12 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "The Healing Space | Dr. Maheen - Clinical Psychologist",
+  title: "The Healing Space |  Maheen - Clinical Psychologist",
   description:
-    "A compassionate psychological sanctuary founded by Dr. Maheen. Offering evidence-based counselling, anxiety & depression therapy, trauma healing, and 1-on-1 sessions. DM or WhatsApp 03149341597 to book.",
+    "A compassionate psychological sanctuary founded by  Maheen. Offering evidence-based counselling, anxiety & depression therapy, trauma healing, and 1-on-1 sessions. DM or WhatsApp 03149341597 to book.",
   keywords: [
     "The Healing Space",
-    "Dr. Maheen",
+    " Maheen",
     "Psychologist",
     "Clinical Psychology",
     "Mental Health Counselling",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
     "03149341597",
     "healingspace.psychology",
   ],
-  authors: [{ name: "Dr. Maheen - Clinical Psychologist" }],
+  authors: [{ name: " Maheen - Clinical Psychologist" }],
   openGraph: {
-    title: "The Healing Space | Dr. Maheen - Clinical Psychologist",
+    title: "The Healing Space |  Maheen - Clinical Psychologist",
     description: "Support • Understand • Heal. Compassionate evidence-based counselling & psychotherapy.",
     url: "https://healingspace.psychology",
     siteName: "The Healing Space",

@@ -40,7 +40,7 @@ export default function Footer({ onOpenBooking, onOpenAdmin }: FooterProps) {
                   The Healing Space
                 </div>
                 <div className="text-[11px] font-medium tracking-wider uppercase text-[#b89bc9]">
-                  Dr. Maheen • Clinical Psychologist
+                   Maheen • Clinical Psychologist
                 </div>
               </div>
             </div>
@@ -63,7 +63,7 @@ export default function Footer({ onOpenBooking, onOpenAdmin }: FooterProps) {
             <ul className="space-y-2 text-xs">
               <li>
                 <a href="#about" className="hover:text-emerald-400 transition-colors">
-                  Meet Dr. Maheen
+                  Meet  Maheen
                 </a>
               </li>
               <li>
@@ -170,7 +170,7 @@ export default function Footer({ onOpenBooking, onOpenAdmin }: FooterProps) {
         {/* Copyright */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
           <div>
-            © {new Date().getFullYear()} The Healing Space (Dr. Maheen). All Rights Reserved.
+            © {new Date().getFullYear()} The Healing Space ( Maheen). All Rights Reserved.
           </div>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1">

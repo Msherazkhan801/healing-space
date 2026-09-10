@@ -23,7 +23,7 @@ interface TherapistProfileProps {
 export default function TherapistProfile({ onOpenBooking }: TherapistProfileProps) {
   const qualifications = [
     {
-      title: "MSc / MS in Clinical Psychology",
+      title: "BS in Clinical Psychology",
       desc: "Comprehensive diagnostic assessment, therapeutic formulation & psychological interventions.",
     },
     {
@@ -68,7 +68,7 @@ export default function TherapistProfile({ onOpenBooking }: TherapistProfileProp
             <span>Meet Your Psychologist</span>
           </div>
           <h2 className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#222c26] dark:text-[#edf4ef]">
-            Compassionate Guidance with Dr. Maheen
+            Compassionate Guidance with  Maheen
           </h2>
           <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
             Dedicated to creating a safe, grounding space where you can unmask, heal deep emotional wounds, and build sustainable inner strength.
@@ -83,7 +83,7 @@ export default function TherapistProfile({ onOpenBooking }: TherapistProfileProp
               <div className="relative aspect-[3/4] w-full">
                 <Image
                   src="/images/therapist.png"
-                  alt="Dr. Maheen - Clinical Psychologist"
+                  alt=" Maheen - Clinical Psychologist"
                   fill
                   sizes="(max-width: 768px) 100vw, 380px"
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -98,7 +98,7 @@ export default function TherapistProfile({ onOpenBooking }: TherapistProfileProp
                   </div>
                   <div>
                     <div className="font-bold text-sm text-[#222c26] dark:text-[#edf4ef] flex items-center gap-1.5">
-                      Dr. Maheen
+                       Maheen
                       <CheckCircle2 className="w-4 h-4 text-[#558d6e]" />
                     </div>
                     <div className="text-xs text-[var(--text-muted)]">
@@ -157,7 +157,7 @@ export default function TherapistProfile({ onOpenBooking }: TherapistProfileProp
               <div className="mt-4 flex items-center gap-3">
                 <div className="h-0.5 w-10 bg-[#815b94]" />
                 <span className="text-xs font-bold uppercase tracking-wider text-[#815b94] dark:text-[#b89bc9]">
-                  Dr. Maheen • Founder & Clinical Psychologist
+                   Maheen • Founder & Clinical Psychologist
                 </span>
               </div>
             </div>

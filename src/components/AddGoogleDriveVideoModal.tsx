@@ -66,7 +66,7 @@ export default function AddGoogleDriveVideoModal({
     addGoogleDriveLessonToCourse(selectedCourseId, {
       title: lessonTitle,
       duration: duration || "15 mins",
-      description: description || "Guided psychological masterclass lecture by Dr. Maheen.",
+      description: description || "Guided psychological masterclass lecture by  Maheen.",
       googleDriveUrl: previewEmbedUrl,
       keyTakeaways: takeaways.length > 0 ? takeaways : ["Clinical grounding technique explained in detail."],
       worksheetTitle: worksheetTitle || undefined,

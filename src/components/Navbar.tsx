@@ -79,7 +79,7 @@ export default function Navbar({ onOpenBooking, onOpenAdmin }: NavbarProps) {
               The Healing Space
             </div>
             <div className="text-[11px] font-medium tracking-wider uppercase text-[#b89bc9]">
-              Dr. Maheen • Psychologist
+               Maheen • Psychologist
             </div>
           </div>
         </a>
@@ -270,7 +270,7 @@ export default function Navbar({ onOpenBooking, onOpenAdmin }: NavbarProps) {
               onClick={() => setMobileMenuOpen(false)}
               className="py-1 hover:text-[#a5c6af]"
             >
-              About Dr. Maheen
+              About  Maheen
             </a>
             <Link
               href="/courses"
@@ -312,7 +312,7 @@ export default function Navbar({ onOpenBooking, onOpenAdmin }: NavbarProps) {
               className="w-full py-2.5 rounded-xl text-center text-sm font-semibold bg-gradient-to-r from-[#427256] to-[#815b94] text-white shadow-md cursor-pointer flex items-center justify-center gap-2"
             >
               <Calendar className="w-4 h-4" />
-              <span>Book with Calendly (Dr. Maheen)</span>
+              <span>Book with Calendly ( Maheen)</span>
             </a>
             <a
               href="https://wa.me/923149341597?text=Hello%20Dr.%20Maheen!%20I%20would%20like%20to%20book%20a%20therapy%20session."

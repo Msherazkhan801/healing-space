@@ -132,7 +132,7 @@ export function evaluateScreenerScore(score: number): {
       title: "Mild Stress & Weariness",
       badgeColor: "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300",
       summary: "You are experiencing noticeable stress or mild anxiety/low mood that may be draining your cognitive energy.",
-      recommendation: "Early therapeutic conversations can prevent mild burnout from escalating. Consider booking a 1-on-1 discovery session with Dr. Maheen.",
+      recommendation: "Early therapeutic conversations can prevent mild burnout from escalating. Consider booking a 1-on-1 discovery session with  Maheen.",
     };
   } else if (score <= 8) {
     return {
@@ -148,7 +148,7 @@ export function evaluateScreenerScore(score: number): {
       title: "Significant Emotional Overload",
       badgeColor: "bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300",
       summary: "You are carrying a heavy emotional burden that is significantly affecting your quality of life and energy.",
-      recommendation: "Please know that you do not have to carry this alone. Dr. Maheen offers compassionate, confidential clinical support to help you heal step by step.",
+      recommendation: "Please know that you do not have to carry this alone.  Maheen offers compassionate, confidential clinical support to help you heal step by step.",
     };
   }
 }

@@ -194,7 +194,7 @@ export async function bookAppointment(
         success: true,
         id: docRef.id,
         isFirestore: true,
-        message: "Your appointment has been securely recorded in Dr. Maheen's Firestore database!",
+        message: "Your appointment has been securely recorded in  Maheen's Firestore database!",
       };
     } catch (firestoreError) {
       console.warn("Firestore write fell back to local storage:", firestoreError);
@@ -254,7 +254,7 @@ export async function fetchAppointments(): Promise<Appointment[]> {
 export function generateWhatsAppBookingLink(data: Partial<Appointment>): string {
   const phone = "923149341597"; // 03149341597 internationalized for WhatsApp
   const textLines = [
-    `Assalam-o-Alaikum / Hello Dr. Maheen! 🌿`,
+    `Assalam-o-Alaikum / Hello  Maheen! 🌿`,
     `I would like to book a psychology counselling session at The Healing Space.`,
     ``,
     `📋 *Booking Details:*`,

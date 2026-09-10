@@ -84,7 +84,7 @@ export default function CoursesPage() {
 
   const handleWatchLesson = (course: Course, lessonId?: string) => {
     if (course.lessons.length === 0) {
-      alert("No video lessons have been added to this course yet. Dr. Maheen will be uploading them shortly!");
+      alert("No video lessons have been added to this course yet.  Maheen will be uploading them shortly!");
       return;
     }
     setActiveWatchCourse(course);
@@ -128,7 +128,7 @@ export default function CoursesPage() {
             <div className="space-y-3 max-w-3xl">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#2c4939] text-[#a5c6af] border border-[#558d6e]/30">
                 <Film className="w-3.5 h-3.5 text-[#d4af37]" />
-                <span>Dr. Maheen's Clinical Video Masterclasses</span>
+                <span> Maheen's Clinical Video Masterclasses</span>
               </div>
               <h1 className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
                 Psychological Masterclasses & Courses
@@ -143,7 +143,7 @@ export default function CoursesPage() {
               <button
                 onClick={handleOpenAdminStudio}
                 className="px-4 py-2.5 rounded-full text-xs font-semibold bg-stone-900 hover:bg-stone-800 text-stone-300 border border-stone-700 hover:border-emerald-600 flex items-center gap-2 transition-all cursor-pointer shadow-md"
-                title="Only Dr. Maheen with Admin password can upload videos"
+                title="Only  Maheen with Admin password can upload videos"
               >
                 <Lock className="w-3.5 h-3.5 text-amber-400" />
                 <span>Admin Video Studio</span>
@@ -346,7 +346,7 @@ export default function CoursesPage() {
                         No videos uploaded in this category yet.
                       </div>
                       <p className="text-[11px] text-stone-500 max-w-md mx-auto">
-                        Dr. Maheen uploads clinical masterclass video lectures directly via the password-protected Admin Studio.
+                         Maheen uploads clinical masterclass video lectures directly via the password-protected Admin Studio.
                       </p>
                     </div>
                   )}

@@ -96,100 +96,29 @@ export function formatGoogleDriveEmbedUrl(urlOrId: string): string {
   return trimmed;
 }
 
-// Clean Course Categories ready for Dr. Maheen's genuine Google Drive video uploads (NO dummy videos)
-export const INITIAL_COURSES: Course[] = [
-  {
-    id: "mastering-anxiety-panic",
-    title: "Mastering Anxiety & Panic Recovery",
-    tagline: "Evidence-Based CBT & Somatic Grounding Masterclass",
-    category: "anxiety",
-    level: "Beginner Friendly",
-    totalDuration: "Self-Paced",
-    badge: "Specialization",
-    thumbnail: "/images/nature.jpg",
-    description:
-      "Clinical psychological video modules by Dr. Maheen focusing on understanding the amygdala, stopping panic attacks rapidly, and challenging catastrophic thoughts.",
-    instructor: {
-      name: "Dr. Maheen",
-      title: "Clinical Psychologist",
-      avatar: "/images/therapist.jpg",
-    },
-    learningOutcomes: [
-      "Understand the physiological neurobiology of panic & hyperventilation",
-      "Master the 4-7-8 and physiological double-sigh vagal nerve techniques",
-      "Learn CBT cognitive restructuring to defuse anxiety spirals",
-      "Formulate a customized emergency anxiety grounding protocol",
-    ],
-    lessons: [],
-  },
-  {
-    id: "overcoming-depression-burnout",
-    title: "Overcoming Depressive Fatigue & Burnout",
-    tagline: "Restoring Motivation, Daily Rhythms & Self-Compassion",
-    category: "depression",
-    level: "Deep Transformational",
-    totalDuration: "Self-Paced",
-    badge: "Evidence-Based",
-    thumbnail: "/images/therapist.jpg",
-    description:
-      "Gentle, structured psychological video lectures to dismantle depressive rumination, overcome emotional exhaustion, and rebuild vitality step-by-step.",
-    instructor: {
-      name: "Dr. Maheen",
-      title: "Clinical Psychologist",
-      avatar: "/images/therapist.jpg",
-    },
-    learningOutcomes: [
-      "Break depressive rumination loops without toxic positivity",
-      "Implement behavioral activation micro-steps to rekindle energy",
-      "Replace harsh self-criticism with restorative self-compassion",
-    ],
-    lessons: [],
-  },
-  {
-    id: "inner-child-trauma-healing",
-    title: "Inner Child Healing & Emotional Safety",
-    tagline: "Healing Attachment Wounds & Reclaiming Self-Worth",
-    category: "trauma",
-    level: "Deep Transformational",
-    totalDuration: "Self-Paced",
-    badge: "Deep Healing",
-    thumbnail: "/images/nature.jpg",
-    description:
-      "A compassionate clinical exploration of attachment styles, unmasking childhood triggers, releasing somatic guilt, and cultivating lasting inner security.",
-    instructor: {
-      name: "Dr. Maheen",
-      title: "Clinical Psychologist",
-      avatar: "/images/therapist.jpg",
-    },
-    learningOutcomes: [
-      "Map present-day triggers to historical attachment wounds",
-      "Practice gentle somatic reparenting dialogues with your inner child",
-      "Cultivate a secure, loving relationship with your authentic self",
-    ],
-    lessons: [],
-  },
-];
+// Default clean initial courses (empty array so no dummy data is forced)
+export const INITIAL_COURSES: Course[] = [];
 
-// Cache key - v4 ensures any old dummy video cache is discarded
-const LOCAL_STORAGE_COURSES_KEY = "the_healing_space_courses_v4";
+// Cache key - v5 ensures any old dummy courses cache is discarded
+const LOCAL_STORAGE_COURSES_KEY = "the_healing_space_courses_v5";
 
-// Retrieve courses (from local cache or initial clean state)
+// Retrieve courses (from local cache or empty state)
 export function getCourses(): Course[] {
-  if (typeof window === "undefined") return INITIAL_COURSES;
+  if (typeof window === "undefined") return [];
   try {
     // Clear any previous legacy cache keys with dummy videos
     localStorage.removeItem("the_healing_space_courses_v1");
     localStorage.removeItem("the_healing_space_courses_v2");
     localStorage.removeItem("the_healing_space_courses_v3");
+    localStorage.removeItem("the_healing_space_courses_v4");
 
     const raw = localStorage.getItem(LOCAL_STORAGE_COURSES_KEY);
-    if (!raw) {
-      localStorage.setItem(LOCAL_STORAGE_COURSES_KEY, JSON.stringify(INITIAL_COURSES));
-      return INITIAL_COURSES;
+    if (raw === null) {
+      return [];
     }
     const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      // Filter out any lessons that don't have valid Google Drive URLs if any dummy remained
+    if (Array.isArray(parsed)) {
+      // Filter out any lessons that don't have valid Google Drive URLs
       const cleaned = parsed.map((course: Course) => ({
         ...course,
         lessons: Array.isArray(course.lessons)
@@ -198,11 +127,32 @@ export function getCourses(): Course[] {
       }));
       return cleaned;
     }
-    return INITIAL_COURSES;
+    return [];
   } catch (err) {
     console.error("Failed to read courses from storage:", err);
-    return INITIAL_COURSES;
+    return [];
   }
+}
+
+// Clear all courses and lessons from Firestore and LocalStorage
+export async function clearAllCourses(): Promise<Course[]> {
+  if (typeof window !== "undefined") {
+    localStorage.setItem(LOCAL_STORAGE_COURSES_KEY, JSON.stringify([]));
+    window.dispatchEvent(new Event("courses_updated"));
+  }
+
+  if (db) {
+    try {
+      const q = query(collection(db, "courses"));
+      const querySnapshot = await getDocs(q);
+      const deletePromises = querySnapshot.docs.map((d) => deleteDoc(d.ref));
+      await Promise.all(deletePromises);
+    } catch (err) {
+      console.warn("Firestore clear courses error:", err);
+    }
+  }
+
+  return [];
 }
 
 // Fetch live from Firestore
@@ -211,16 +161,14 @@ export async function fetchCoursesFromFirestore(): Promise<Course[]> {
     try {
       const q = query(collection(db, "courses"));
       const querySnapshot = await getDocs(q);
-      if (!querySnapshot.empty) {
-        const firestoreCourses: Course[] = [];
-        querySnapshot.forEach((d) => {
-          firestoreCourses.push({ ...d.data(), id: d.id } as Course);
-        });
-        if (typeof window !== "undefined") {
-          localStorage.setItem(LOCAL_STORAGE_COURSES_KEY, JSON.stringify(firestoreCourses));
-        }
-        return firestoreCourses;
+      const firestoreCourses: Course[] = [];
+      querySnapshot.forEach((d) => {
+        firestoreCourses.push({ ...d.data(), id: d.id } as Course);
+      });
+      if (typeof window !== "undefined") {
+        localStorage.setItem(LOCAL_STORAGE_COURSES_KEY, JSON.stringify(firestoreCourses));
       }
+      return firestoreCourses;
     } catch (err) {
       console.warn("Firestore courses fetch error, using local data:", err);
     }
@@ -339,3 +287,23 @@ export async function createCourse(
   return list;
 }
 
+// Delete an entire Course Category
+export async function deleteCourse(courseId: string): Promise<Course[]> {
+  let list = getCourses();
+  list = list.filter((c) => c.id !== courseId);
+
+  if (typeof window !== "undefined") {
+    localStorage.setItem(LOCAL_STORAGE_COURSES_KEY, JSON.stringify(list));
+    window.dispatchEvent(new Event("courses_updated"));
+  }
+
+  if (db) {
+    try {
+      await deleteDoc(doc(db, "courses", courseId));
+    } catch (err) {
+      console.warn("Firestore course deletion error:", err);
+    }
+  }
+
+  return list;
+}

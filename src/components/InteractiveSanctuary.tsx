@@ -403,7 +403,7 @@ export default function InteractiveSanctuary({
                     “In the quiet of nature, the mind finds its natural stillness.”
                   </h3>
                   <p className="text-xs text-stone-200">
-                    Dr. Maheen • Clinical Mindfulness Reflection
+                     Maheen • Clinical Mindfulness Reflection
                   </p>
                 </div>
 
@@ -699,7 +699,7 @@ export default function InteractiveSanctuary({
 
                   <a
                     href={`https://wa.me/923149341597?text=${encodeURIComponent(
-                      `Hello Dr. Maheen! I took the mental wellness self-check screener on The Healing Space website. My score was ${totalScreenerScore}/12 (${screenerEvaluation.level}). I would like to schedule a consultation.`
+                      `Hello  Maheen! I took the mental wellness self-check screener on The Healing Space website. My score was ${totalScreenerScore}/12 (${screenerEvaluation.level}). I would like to schedule a consultation.`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"

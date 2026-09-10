@@ -20,7 +20,7 @@ export default function FAQSection({ onOpenBooking }: FAQSectionProps) {
   const faqs = [
     {
       q: "What should I expect during my first therapy session?",
-      a: "The initial discovery session is a gentle, pressure-free conversation. Dr. Maheen will listen to what brought you to therapy, explore your current struggles, and answer any questions you have. Together, you will outline initial goals and discuss the therapeutic approach best suited for your healing.",
+      a: "The initial discovery session is a gentle, pressure-free conversation.  Maheen will listen to what brought you to therapy, explore your current struggles, and answer any questions you have. Together, you will outline initial goals and discuss the therapeutic approach best suited for your healing.",
     },
     {
       q: "Is my personal information and conversation strictly confidential?",
@@ -57,7 +57,7 @@ export default function FAQSection({ onOpenBooking }: FAQSectionProps) {
             Frequently Asked Questions
           </h2>
           <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
-            Everything you need to know about starting your counselling journey with Dr. Maheen.
+            Everything you need to know about starting your counselling journey with  Maheen.
           </p>
         </div>
 
@@ -95,7 +95,7 @@ export default function FAQSection({ onOpenBooking }: FAQSectionProps) {
             Have a question that is not listed here?
           </h3>
           <p className="text-xs sm:text-sm text-[var(--text-muted)] max-w-md mx-auto">
-            Feel free to send a private message to Dr. Maheen on WhatsApp or request a consultation callback.
+            Feel free to send a private message to  Maheen on WhatsApp or request a consultation callback.
           </p>
           <div className="flex flex-wrap justify-center gap-3 pt-1">
             <button

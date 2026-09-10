@@ -168,7 +168,7 @@ export default function VideoPlayerModal({
                       className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-stone-800 hover:bg-stone-700 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5 shadow-sm transition-all cursor-pointer"
                     >
                       <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>WhatsApp Dr. Maheen</span>
+                      <span>WhatsApp  Maheen</span>
                     </a>
 
                     <a
@@ -243,14 +243,14 @@ export default function VideoPlayerModal({
               <div className="relative w-12 h-12 rounded-full overflow-hidden border border-[#558d6e]/40 shrink-0">
                 <Image
                   src="/images/therapist.png"
-                  alt="Dr. Maheen"
+                  alt=" Maheen"
                   fill
                   sizes="48px"
                   className="object-cover"
                 />
               </div>
               <div>
-                <div className="text-xs font-bold text-white">Dr. Maheen</div>
+                <div className="text-xs font-bold text-white"> Maheen</div>
                 <div className="text-[11px] text-[#a5c6af]">Clinical Psychologist</div>
                 <div className="text-[10px] text-[var(--text-muted)]">The Healing Space</div>
               </div>

@@ -52,7 +52,7 @@ export default function HeroSlider({ onOpenBooking }: HeroSliderProps) {
       title: "Safe Space for Your Mind & Heart",
       tagline: "Support • Understand • Heal",
       description:
-        "Every emotion tells a story. Step into a confidential, compassionate psychological sanctuary designed by Dr. Maheen to help you unburden racing thoughts, reduce anxiety, and regain emotional balance.",
+        "Every emotion tells a story. Step into a confidential, compassionate psychological sanctuary designed by  Maheen to help you unburden racing thoughts, reduce anxiety, and regain emotional balance.",
       gradient: "from-[#cbdfd1]/30 via-[#faf7f2]/50 to-[#e7daee]/30 dark:from-[#2c4939]/30 dark:via-[#121815]/50 dark:to-[#4c3755]/30",
       accentBorder: "border-[#558d6e]/40",
       keyStats: [
@@ -80,7 +80,7 @@ export default function HeroSlider({ onOpenBooking }: HeroSliderProps) {
         { label: "Goal", value: "Sustainable Peace" },
       ],
       primaryBtnText: "Explore Therapeutic Care",
-      secondaryBtnText: "WhatsApp Dr. Maheen",
+      secondaryBtnText: "WhatsApp  Maheen",
       actionType: "services",
     },
     {
@@ -94,7 +94,7 @@ export default function HeroSlider({ onOpenBooking }: HeroSliderProps) {
       gradient: "from-[#e7daee]/30 via-[#faf7f2]/50 to-[#f2db9d]/20 dark:from-[#4c3755]/30 dark:via-[#121815]/50 dark:to-[#5a3f65]/30",
       accentBorder: "border-[#815b94]/40",
       keyStats: [
-        { label: "Lead Clinical", value: "Dr. Maheen" },
+        { label: "Lead Clinical", value: " Maheen" },
         { label: "Practice", value: "Clinical Psychologist" },
         { label: "Methods", value: "Evidence-Based" },
       ],
@@ -232,7 +232,7 @@ export default function HeroSlider({ onOpenBooking }: HeroSliderProps) {
               </div>
             </div>
 
-            {/* Right Visual Column (Dr. Maheen Badge Spotlight) */}
+            {/* Right Visual Column ( Maheen Badge Spotlight) */}
             <div className="lg:col-span-5 flex flex-col items-center justify-center">
               <div className="relative w-full max-w-[320px] sm:max-w-[360px] rounded-3xl p-4 bg-gradient-to-tr from-stone-900/95 via-stone-900/70 to-stone-900/95 border border-stone-800 shadow-2xl flex flex-col items-center justify-center text-center group">
                 {/* Floating Ring Aura */}
@@ -242,7 +242,7 @@ export default function HeroSlider({ onOpenBooking }: HeroSliderProps) {
                 <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-lg mb-4 border border-[#558d6e]/40 group-hover:scale-[1.02] transition-transform duration-500 bg-stone-950">
                   <Image
                     src="/images/therapist.png"
-                    alt="Dr. Maheen - Clinical Psychologist"
+                    alt=" Maheen - Clinical Psychologist"
                     fill
                     sizes="(max-width: 768px) 100vw, 360px"
                     className="object-cover object-top"
@@ -254,7 +254,7 @@ export default function HeroSlider({ onOpenBooking }: HeroSliderProps) {
                 <div className="space-y-1.5 w-full">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-[#2c4939] text-[#a5c6af] border border-[#558d6e]/30">
                     <Sparkles className="w-3 h-3 text-[#d4af37]" />
-                    <span>Dr. Maheen • Clinical Psychologist</span>
+                    <span> Maheen • Clinical Psychologist</span>
                   </div>
                   <div className="font-serif-luxury font-bold text-lg text-[#edf4ef]">
                     The Healing Space
