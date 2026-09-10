@@ -207,7 +207,7 @@ export default function HeroSlider({ onOpenBooking }: HeroSliderProps) {
                 ))}
               </div>
 
-              {/* Action Buttons */}
+              {/* Action Buttons s */}
               <div className="flex flex-wrap items-center gap-4 pt-3">
                 <a
                   href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/maheenmanzoor43/30min?back=1&month=2026-09"}
